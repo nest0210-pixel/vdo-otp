@@ -12,11 +12,13 @@ app.get('/otp', async (req, res) => {
   const videoId = req.query.videoId;
   if (!videoId) return res.status(400).json({ error: 'videoId required' });
 
-  const userIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown';
+  const rawIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown';
+  const userIp = rawIp.split(',')[0].trim();
 
-const annotate = JSON.stringify([
-    { "type": "text", "text": "IP: " + userIp, "alpha": "0.9", "color": "0xFF0000", "size": "20", "x": "50", "y": "50" }
+  const annotate = JSON.stringify([
+    { "type": "text", "text": "IP: " + userIp, "alpha": "0.9", "color": "0x0000FF", "size": "12", "x": "50", "y": "50" }
   ]);
+
   try {
     const response = await fetch(`https://dev.vdocipher.com/api/videos/${videoId}/otp`, {
       method: 'POST',
