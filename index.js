@@ -1,13 +1,8 @@
 const express = require('express');
 const app = express();
 
-const ALLOWED_ORIGINS = ['https://mindacu.imweb.me', 'https://mindacu.com'];
-
 app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  if (ALLOWED_ORIGINS.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  }
+  res.setHeader('Access-Control-Allow-Origin', 'https://mindacu.imweb.me');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   if (req.method === 'OPTIONS') return res.status(200).end();
   next();
@@ -21,7 +16,7 @@ app.get('/otp', async (req, res) => {
   const userIp = rawIp.split(',')[0].trim();
 
   const annotate = JSON.stringify([
-    { "type": "rtext", "text": "IP Tracking: " + userIp, "alpha": "0.7", "color": "0x0000FF", "size": "8", "interval": "600000" }
+    { "type": "text", "text": "IP Tracking Active: " + userIp, "alpha": "0.9", "color": "0x0000FF", "size": "8", "x": "3", "y": "2.5" }
   ]);
 
   try {
