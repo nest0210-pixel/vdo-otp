@@ -30,7 +30,7 @@ app.get('/otp', async (req, res) => {
       body: JSON.stringify({ ttl: 300, annotate })
     });
     const data = await response.json();
-    res.json(data);
+    res.json({ otp: data.otp, playbackInfo: data.playbackInfo, clientIp: userIp });
   } catch (e) {
     res.status(500).json({ error: 'Failed' });
   }
