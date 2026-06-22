@@ -1,8 +1,13 @@
 const express = require('express');
 const app = express();
 
+const ALLOWED_ORIGINS = ['https://mindacu.imweb.me', 'https://mindacu.com'];
+
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://mindacu.imweb.me');
+  const origin = req.headers.origin;
+  if (ALLOWED_ORIGINS.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   if (req.method === 'OPTIONS') return res.status(200).end();
   next();
