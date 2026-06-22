@@ -21,7 +21,7 @@ app.get('/otp', async (req, res) => {
   const userIp = rawIp.split(',')[0].trim();
 
   const annotate = JSON.stringify([
-    { "type": "rtext", "text": "IP Tracking: " + userIp, "alpha": "0.7", "color": "0x0000FF", "size": "8", "interval": "600000" }
+    { "type": "rtext", "text": "IP Tracking: " + userIp, "alpha": "0.7", "color": "0x0000FF", "size": "8", "interval": "3000" }
   ]);
 
   try {
