@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+
 const ALLOWED_ORIGINS = ['https://mindacu.imweb.me', 'https://mindacu.com'];
 
 app.use((req, res, next) => {
@@ -19,10 +20,10 @@ app.get('/otp', async (req, res) => {
   const rawIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown';
   const userIp = rawIp.split(',')[0].trim();
 
- const annotate = JSON.stringify([
-    { "type": "text", "text": "IP Tracking: " + userIp, "alpha": "0.7", "color": "0x0000FF", "size": "8", "x": "2.5", "y": "3.5" }
-  ]);  // ← 이게 빠져있었어요
- 
+  const annotate = JSON.stringify([
+    { "type": "rtext", "text": "IP Tracking: " + userIp, "alpha": "0.7", "color": "0x0000FF", "size": "8", "interval": "600000" }
+  ]);
+
   try {
     const response = await fetch(`https://dev.vdocipher.com/api/videos/${videoId}/otp`, {
       method: 'POST',
