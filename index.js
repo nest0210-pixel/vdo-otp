@@ -1,8 +1,12 @@
 const express = require('express');
 const app = express();
+const ALLOWED_ORIGINS = ['https://mindacu.imweb.me', 'https://mindacu.com'];
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://mindacu.imweb.me');
+  const origin = req.headers.origin;
+  if (ALLOWED_ORIGINS.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   if (req.method === 'OPTIONS') return res.status(200).end();
   next();
@@ -16,7 +20,7 @@ app.get('/otp', async (req, res) => {
   const userIp = rawIp.split(',')[0].trim();
 
   const annotate = JSON.stringify([
-    { "type": "text", "text": "IP Tracking: " + userIp, "alpha": "0.9", "color": "0x0000FF", "size": "8", "x": "2.5", "y": "3.5" }
+    { "type": "text", "text": "IP Tracking: " + userIp, "alpha": "0.7", "color": "0x0000FF", "size": "8", "x": "2.5", "y": "3.5" }
 
   try {
     const response = await fetch(`https://dev.vdocipher.com/api/videos/${videoId}/otp`, {
