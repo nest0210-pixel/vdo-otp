@@ -16,8 +16,7 @@ app.get('/otp', async (req, res) => {
   const userIp = rawIp.split(',')[0].trim();
 
   const annotate = JSON.stringify([
-    { "type": "rtext", "text": "IP Tracking: " + userIp, "alpha": "0.9", "color": "0x0000FF", "size": "6", "interval": "600000" }
-  ]);
+    { "type": "text", "text": "IP Tracking: " + userIp, "alpha": "0.9", "color": "0x0000FF", "size": "6", "x": "2", "y": "4" }
 
   try {
     const response = await fetch(`https://dev.vdocipher.com/api/videos/${videoId}/otp`, {
