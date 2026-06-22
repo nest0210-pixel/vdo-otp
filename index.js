@@ -15,7 +15,7 @@ app.get('/otp', async (req, res) => {
   const userIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown';
 
 const annotate = JSON.stringify([
-    { "type": "text", "text": userIp, "alpha": "0.15", "color": "0xFFFFFF", "size": "14", "x": "2", "y": "3" }
+    { "type": "text", "text": "IP: " + userIp, "alpha": "0.7", "color": "0xFF0000", "size": "14", "x": "2", "y": "3" }
   ]);
   try {
     const response = await fetch(`https://dev.vdocipher.com/api/videos/${videoId}/otp`, {
